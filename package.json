@@ -1,0 +1,29 @@
+{
+  "name": "auth_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "migrate:latest": "knex migrate:latest",
+    "migrate:make": "knex migrate:make",
+    "migrate:rollback": "knex migrate:rollback",
+    "seed": "knex seed:make",
+    "seed:run": "knex seed:run",
+    "db:reset": "knex migrate:rollback && knex migrate:latest && knex seed:run"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.1.3",
+    "express-session": "^1.17.1",
+    "knex": "^0.21.0",
+    "mysql": "^2.18.1",
+    "objection": "^2.1.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
