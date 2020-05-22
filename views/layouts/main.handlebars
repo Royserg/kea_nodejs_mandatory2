@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+
+  {{!-- PapersCSS styles --}}
+  <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css">
+
+  <link rel="stylesheet" href="css/main.css">
+
+  {{!-- Custom css file --}}
+  <link rel="stylesheet" href="css/{{style}}">
+</head>
+<body>
+  <div class="wrapper">
+    {{> header }}
+
+    <main class="main-content">
+      {{{ body }}}
+    </main>
+
+
+    {{> footer }}
+  </div>
+
+</body>
+</html>

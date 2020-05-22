@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.container {
+  width: 80%;
+}
+
+.main-content {
+  display: flex;
+  flex: 1 0 auto;
+}
+
+/* Flexbox classes */
+.align-self-center {
+  align-self: center;
+}

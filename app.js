@@ -2,6 +2,13 @@ const express = require("express");
 const app = express();
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(express.static('public'))
+
+/* Handlebars */
+const exphbs = require('express-handlebars')
+app.engine('handlebars', exphbs())
+app.set('view engine', 'handlebars')
 
 /* SESSION */
 const session = require('express-session')
@@ -57,14 +64,27 @@ app.use(usersRoute)
 const Elective = require('./models/Elective')
 
 
-app.get('/electives', async (req, res) => {
-  const electives = await Elective.query()
-
-  res.json({ electives: electives })
+app.get('/', (req, res) => {
+  const list = ['first', 'second', 'third']
+  const content = 'this is some content'
+  res.render('home', {
+    title: 'home page',
+    content,
+    published: true,
+    list,
+  })
 })
-/*  */
 
+app.get('/electives', async (req, res) => {
 
+  const electives = await Elective.query()
+  // res.json({ electives: electives })
+  console.log(electives)
+  res.render('electives', {
+    title: 'Electives',
+    electives,
+  })
+})
 
 
 const PORT = process.env.PORT || 3000;

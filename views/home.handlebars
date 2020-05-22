@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Example Home view</h1>
+  {{#if published}}
+    {{content}}
+  {{/if}}
+
+  <ul>
+    {{#each list}}
+    <li>{{this}}</li>
+    {{/each}}
+  </ul>
+</div>

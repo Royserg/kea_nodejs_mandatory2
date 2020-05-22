@@ -4,9 +4,19 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const saltRounds = 12
 
+/* ==== Login */
+
+router.get('/login', (req, res) => {
+  res.render('login', {
+    style: 'login.css',
+  })
+})
+
 router.post('/login', (req, res) => {
   // 1. Get Form data
+  const { username, password } = req.body
   // 2. Validate the data
+  
   // 3. Check if user exists and get their password
   // 4. Compare passwords
   // 4. Send response based on the comparison
