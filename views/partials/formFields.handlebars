@@ -1,0 +1,10 @@
+{{#each fields}}
+  <div class="row flex-center">
+    <div class="md-8 sm-12 col">
+      <div class="form-group">
+        <label for="username">{{this.label}}</label>
+        <input id="{{this.name}}" name="{{this.name}}" type="{{this.type}}" class="input-block">
+      </div>
+    </div>
+  </div>
+{{/each}}
