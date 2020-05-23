@@ -3,7 +3,7 @@
     <div class="container row flex-edges">
       <div class="nav-brand">
         <h3>
-          <a href="#">ElectivesBrowser</a>
+          <a href="/">ElectivesApp</a>
         </h3>
       </div>
       <div class="collapsible">
@@ -17,9 +17,13 @@
         </button>
         <div class="collapsible-body">
           <ul class="inline">
-            <li><a href="/signup">Sign Up</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/logout">Logout</a></li>
+            {{#if user}}
+              <li><a href="/logout">Logout</a></li>
+
+              {{else}}
+                <li><a href="/signup">Sign Up</a></li>
+                <li><a href="/login">Login</a></li>
+            {{/if}}
           </ul>
         </div>
       </div>
