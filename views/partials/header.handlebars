@@ -18,7 +18,7 @@
         <div class="collapsible-body">
           <ul class="inline">
             {{#if user}}
-              <li><a href="/logout">Logout</a></li>
+              <li><a href="#" id="logoutBtn">Logout</a></li>
 
               {{else}}
                 <li><a href="/signup">Sign Up</a></li>
@@ -30,3 +30,5 @@
     </div>
   </nav>
 </header>
+
+{{> script filename="header.js"}}
