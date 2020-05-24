@@ -8,6 +8,10 @@ exports.seed = function(knex) {
         { course_name: 'Python', user_id: users[0].id },
         { course_name: 'iOS', user_id: users[1].id },
         { course_name: 'Python', user_id: users[1].id },
+        { course_name: 'Python', user_id: users[2].id },
+        { course_name: 'C', user_id: users[2].id },
+        { course_name: 'NodeJS', user_id: users[2].id },
+        { course_name: 'Android', user_id: users[2].id },
       ]);
     }
   })
