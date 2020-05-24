@@ -44,10 +44,8 @@ app.use('/login', authLimiter)
 const { Model } = require('objection')
 const Knex = require('knex')
 const knexfile = require('./knexfile')
-
 // Initialize knex
 const knex = Knex(knexfile.development)
-
 // Give the knex instance to objection.
 Model.knex(knex)
 
@@ -63,12 +61,14 @@ app.use(usersRoute)
 /*  */
 const Elective = require('./models/Elective')
 
+const { authenticate } = require('./middleware/auth')
 
-app.get('/', (req, res) => {
+app.get('/', authenticate, (req, res) => {
   const list = ['first', 'second', 'third']
   const content = 'this is some content'
   res.render('home', {
     title: 'home page',
+    user: req.session.user,
     content,
     published: true,
     list,
