@@ -17,7 +17,7 @@ router.get('/signup', checkSignedIn, (req, res) => {
 router.post('/signup', async (req, res) => {
   const { username, email, password } = req.body;
 
-  if (username && password) {
+  if (username && email && password) {
     // password validation
     if (password.length < 8) {
       return res
@@ -41,6 +41,7 @@ router.post('/signup', async (req, res) => {
         const newUser = await User.query().insert({
           username: username,
           password: hashedPassword,
+          email: email,
         });
         return res
           .status(200)
