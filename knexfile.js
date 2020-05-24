@@ -11,7 +11,7 @@ module.exports = {
       user:     user,
       password: password
     },
-    // Mapps sql snake-case to js camel-case
+    // Maps sql snake-case to js camel-case
     ...knexSnakeCaseMappers()
   },
 
