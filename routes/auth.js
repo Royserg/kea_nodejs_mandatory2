@@ -2,33 +2,13 @@ const router = require('express').Router();
 const User = require('../models/User')
 
 const { username, email, password, confirmPassword } = require('../utils/formFieldsKinds')
+const { authenticate, checkSignedIn } = require('../middleware/auth')
 
 const bcrypt = require('bcrypt')
 const saltRounds = 12
 
-/* === Login */
-router.get('/login', (req, res) => {
-  res.render('login', {
-    style: 'login.css',
-    fields: [username, password]
-  })
-})
-
-router.post('/login', (req, res) => {
-  // 1. Get Form data
-  const { username, password } = req.body
-  console.log(username, password)
-  // 2. Validate the data
-
-  // 3. Check if user exists and get their password
-  // 4. Compare passwords
-  // 4. Send response based on the comparison
-
-  return res.status(501).send({ response: 'Not implemented '})
-})
-
 /* === SignUp */
-router.get('/signup', (req, res) => {
+router.get('/signup', checkSignedIn, (req, res) => {
   res.render('signup', {
     fields: [username, email, password, confirmPassword]
   })
@@ -46,10 +26,11 @@ router.post('/signup', async (req, res) => {
     } else {
       try {
         // Check if username exists
-        const userExists = await User.query()
-          .select()
-          .where('username', username)
-          .limit(1);
+        const userExists = await User
+                                  .query()
+                                  .select()
+                                  .where('username', username)
+                                  .limit(1);
 
         if (userExists.length > 0) {
           return res.status(400).json({ response: "Username already exists" });
@@ -75,12 +56,49 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-router.post("/login", (req, res) => {
-  res.status(501).json({ response: "Not implemented yet" });
-});
+/* === Login */
+router.get('/login', checkSignedIn, (req, res) => {
+  res.render('login', {
+    style: 'login.css',
+    fields: [username, password]
+  })
+})
 
-router.post("/logout", (req, res) => {
-  res.status(501).json({ response: "Not implemented yet" });
+router.post('/login', async (req, res) => {
+  const { username, password } = req.body
+  try {
+    const user = await User
+                        .query()
+                        .select()
+                        .where('username', username)
+                        .limit(1);
+
+    const foundUser = user[0]
+    if (!foundUser) {
+      throw Error()
+    }
+
+    const isCorrectPassword = await bcrypt.compare(password, foundUser.password)
+    if (!isCorrectPassword) {
+      throw Error()
+    }
+
+    /* Save user data to session */
+    req.session.user = {
+      id: foundUser.id,
+      username: foundUser.username,
+    }
+
+    return res.status(200).send({ response: 'Successfully signed in'})
+  } catch (err) {
+    return res.status(400).json({ response: "Wrong username or password" });
+  }
+})
+
+/* === Logout */
+router.post("/logout", authenticate, (req, res) => {
+  req.session.destroy()
+  res.status(204)
 });
 
 module.exports = router;
