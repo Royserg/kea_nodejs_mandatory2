@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 
 app.use(express.json())
@@ -50,41 +50,16 @@ const knex = Knex(knexfile.development)
 Model.knex(knex)
 
 /* Routes =========== */
+const authRoute = require('./routes/api/auth')
+const usersRoute = require('./routes/api/users')
+const pagesRoute = require('./routes/pages')
 
-const authRoute = require('./routes/auth')
-const usersRoute = require('./routes/users')
-  // auth
+// auth
 app.use(authRoute)
-  // users
+// users
 app.use(usersRoute)
-
-/*  */
-const Elective = require('./models/Elective')
-
-const { authenticate } = require('./middleware/auth')
-
-app.get('/', authenticate, (req, res) => {
-  const list = ['first', 'second', 'third']
-  const content = 'this is some content'
-  res.render('home', {
-    title: 'home page',
-    user: req.session.user,
-    content,
-    published: true,
-    list,
-  })
-})
-
-app.get('/electives', async (req, res) => {
-
-  const electives = await Elective.query()
-  // res.json({ electives: electives })
-  console.log(electives)
-  res.render('electives', {
-    title: 'Electives',
-    electives,
-  })
-})
+// views
+app.use(pagesRoute)
 
 
 const PORT = process.env.PORT || 3000;

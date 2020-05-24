@@ -1,12 +1,6 @@
 <div class="container">
-  <h1>Example Home view</h1>
-  {{#if published}}
-    {{content}}
-  {{/if}}
+  <h1>Welcome, {{user.username}}</h1>
 
-  <ul>
-    {{#each list}}
-    <li>{{this}}</li>
-    {{/each}}
-  </ul>
+  <a href="/me" class="paper-btn btn-large">About Me</a>
+  <a href="/electives" class="paper-btn">My Electives</a>
 </div>
