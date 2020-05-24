@@ -1,0 +1,34 @@
+<header>
+  <nav class="border fixed split-nav">
+    <div class="container row flex-edges">
+      <div class="nav-brand">
+        <h3>
+          <a href="/">ElectivesApp</a>
+        </h3>
+      </div>
+      <div class="collapsible">
+        <input id="collapsible1" type="checkbox" name="collapsible1">
+        <button>
+          <label for="collapsible1">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+          </label>
+        </button>
+        <div class="collapsible-body">
+          <ul class="inline">
+            {{#if user}}
+              <li><a href="#" id="logoutBtn">Logout</a></li>
+
+              {{else}}
+                <li><a href="/signup">Sign Up</a></li>
+                <li><a href="/login">Login</a></li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+{{> script filename="header.js"}}

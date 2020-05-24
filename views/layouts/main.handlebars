@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+
+  {{!-- PapersCSS styles --}}
+  <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css">
+
+  <link rel="stylesheet" href="css/main.css">
+
+  {{!-- Custom css file --}}
+  {{#if style}}
+    <link rel="stylesheet" href="css/{{style}}">
+  {{/if}}
+
+  {{!-- Axios --}}
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  {{!-- SweetAlert2 Library --}}
+  <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@3/dark.css" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+
+  <script src="js/toasts.js"></script>
+</head>
+<body>
+  <div class="wrapper">
+    {{> header }}
+
+    <main class="main-content">
+      {{{ body }}}
+    </main>
+
+
+    {{> footer }}
+  </div>
+
+</body>
+</html>

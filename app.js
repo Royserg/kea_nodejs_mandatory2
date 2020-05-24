@@ -1,7 +1,14 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(express.static('public'))
+
+/* Handlebars */
+const exphbs = require('express-handlebars')
+app.engine('handlebars', exphbs())
+app.set('view engine', 'handlebars')
 
 /* SESSION */
 const session = require('express-session')
@@ -37,34 +44,22 @@ app.use('/login', authLimiter)
 const { Model } = require('objection')
 const Knex = require('knex')
 const knexfile = require('./knexfile')
-
 // Initialize knex
 const knex = Knex(knexfile.development)
-
 // Give the knex instance to objection.
 Model.knex(knex)
 
 /* Routes =========== */
+const authRoute = require('./routes/api/auth')
+const usersRoute = require('./routes/api/users')
+const pagesRoute = require('./routes/pages')
 
-const authRoute = require('./routes/auth')
-const usersRoute = require('./routes/users')
-  // auth
+// auth
 app.use(authRoute)
-  // users
+// users
 app.use(usersRoute)
-
-/*  */
-const Elective = require('./models/Elective')
-
-
-app.get('/electives', async (req, res) => {
-  const electives = await Elective.query()
-
-  res.json({ electives: electives })
-})
-/*  */
-
-
+// views
+app.use(pagesRoute)
 
 
 const PORT = process.env.PORT || 3000;

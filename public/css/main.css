@@ -1,0 +1,35 @@
+body {
+  overflow: hidden;
+}
+
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.container {
+  width: 80%;
+}
+
+.main-content {
+  margin-top: 66px;
+  height: calc(100vh - 88px);
+  display: flex;
+  flex: 1 0 auto;
+  box-sizing: border-box;
+}
+
+/* Flexbox classes */
+.align-self-center {
+  align-self: center;
+}
+
+/* override paperCSS */
+.row {
+  margin-bottom: 0;
+}
+
+.form-group {
+  margin-bottom: 0.5rem;
+}
