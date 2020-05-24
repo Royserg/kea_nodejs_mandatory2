@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const User = require('../../models/User')
 
+const sendMail = require('../../utils/email')
+
 const {
   username,
   email,
@@ -48,6 +50,14 @@ router.post('/signup', async (req, res) => {
           password: hashedPassword,
           email: email,
         })
+
+        // Send welcoming email to new user
+        sendMail(
+          email,
+          'Welcome to ElectivesApp',
+          'Hello you to the app. Bye'
+        )
+
         return res
           .status(200)
           .json({ response: 'Successfully signup', newUser })
