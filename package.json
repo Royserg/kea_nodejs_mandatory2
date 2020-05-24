@@ -5,12 +5,12 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-    "migrate:latest": "knex migrate:latest",
-    "migrate:make": "knex migrate:make",
-    "migrate:rollback": "knex migrate:rollback",
-    "seed": "knex seed:make",
-    "seed:run": "knex seed:run",
-    "db:reset": "knex migrate:rollback && knex migrate:latest && knex seed:run"
+    "migrate:latest": "knex --env development migrate:latest",
+    "migrate:make": "knex --env development migrate:make",
+    "migrate:rollback": "knex --env development migrate:rollback",
+    "seed": "knex --env development seed:make",
+    "seed:run": "knex --env development seed:run",
+    "db:reset": "npm run migrate:rollback && npm run migrate:latest && npm run seed:run"
   },
   "author": "",
   "license": "ISC",
